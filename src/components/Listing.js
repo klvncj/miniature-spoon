@@ -107,8 +107,6 @@ function Listing({
               </SwiperSlide>
             ))}
           </Swiper> */}
-          <HiArrowCircleLeft ref={prevEl} />
-          <HiArrowCircleRight ref={nextEl} />
 
           <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
         </CardHeader>
@@ -136,10 +134,7 @@ function Listing({
               {rating}
             </Typography>
           </div>
-          <Typography color="gray">
-            Enter a freshly updated and thoughtfully furnished peaceful home
-            surrounded by ancient trees, stone walls, and open meadows.
-          </Typography>
+          <Typography color="gray">{title}</Typography>
           <div className="group mt-8 inline-flex flex-wrap items-center gap-3">
             <Tooltip content={`$${price} per night`}>
               <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">

@@ -36,6 +36,7 @@ import {
 import { ImUsers } from "react-icons/im";
 import { BiMenu } from "react-icons/bi";
 import {} from "@material-tailwind/react";
+import { BsFillHouseAddFill } from "react-icons/bs";
 // profile menu component
 const profileMenuItems = [
   {
@@ -221,6 +222,12 @@ function Nav() {
                   </MenuItem>
                 </>
               )}
+              <MenuItem className="flex items-center gap-2">
+                <BsFillHouseAddFill />
+                <Typography varient="h6" className="font-normal">
+                  Become A Seller
+                </Typography>
+              </MenuItem>
               <hr className="my-2 border-blue-gray-50" />
               <MenuItem className="flex items-center gap-2">
                 <BiSolidHelpCircle size={20} />

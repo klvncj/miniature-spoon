@@ -5,6 +5,7 @@ import { BsBuilding } from "react-icons/bs";
 import { BiBuildings } from "react-icons/bi";
 import { RiBuilding2Fill } from "react-icons/ri";
 import Listing from "./Listing";
+
 const item = [
   { name: "Apartments", icon: <MdApartment size={28} /> },
   { name: "Home", icon: <BiBuildings size={28} /> },
