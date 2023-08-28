@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "../asset/images//png-transparent-airbnb-logo-san-francisco-travel-hotel-airbnb-logo-text-trademark-logo-removebg-preview.png";
 import { HiSearch, HiInbox } from "react-icons/hi";
 import { HiInboxArrowDown } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
 const { BiSolidHelpCircle, BiUserPlus, BiLockAlt } = require("react-icons/bi");
 
 import {
@@ -37,6 +38,9 @@ import { ImUsers } from "react-icons/im";
 import { BiMenu } from "react-icons/bi";
 import {} from "@material-tailwind/react";
 import { BsFillHouseAddFill } from "react-icons/bs";
+import { Router } from "next/router";
+import { data } from "autoprefixer";
+import Link from "next/link";
 // profile menu component
 const profileMenuItems = [
   {
@@ -133,7 +137,8 @@ function Nav() {
       () => window.innerWidth >= 960 && setIsNavOpen(false)
     );
   }, []);
-  let user = true;
+  let user = false;
+  const router = useRouter();
   return (
     <>
       <nav className="sticky top-0  flex justify-between  p-2 mx-auto z-50 shadow-md bg-white">
@@ -174,9 +179,22 @@ function Nav() {
           <menu handler={<BiMenu />} />
           <div className="hidden md:flex items-center gap-2">
             {user ? (
-              <ProfileMenu />
+              <>
+                <ProfileMenu />
+              </>
             ) : (
-              <Chip className=" flex items-center mr-4" value="Guest" />
+              <>
+                <Link href="/seller">
+                  <Chip
+                    href
+                    value="Become a seller"
+                    variant="ghost"
+                    color="teal"
+                    className="flex items-center"
+                  />
+                </Link>
+                <Chip className=" flex items-center mr-4" value="Guest" />
+              </>
             )}
           </div>
         </div>
