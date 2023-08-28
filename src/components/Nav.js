@@ -5,7 +5,7 @@ import { HiSearch, HiInbox } from "react-icons/hi";
 import { HiInboxArrowDown } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 const { BiSolidHelpCircle, BiUserPlus, BiLockAlt } = require("react-icons/bi");
-
+import { FiLogOut } from "react-icons/fi";
 import {
   Navbar,
   MobileNav,
@@ -41,6 +41,9 @@ import { BsFillHouseAddFill } from "react-icons/bs";
 import { Router } from "next/router";
 import { data } from "autoprefixer";
 import Link from "next/link";
+import { user } from "@/app/signup/page";
+import { signOut } from "firebase/auth";
+import { auth } from "@/config/firebase";
 // profile menu component
 const profileMenuItems = [
   {
@@ -59,12 +62,15 @@ const profileMenuItems = [
     label: "Help",
     icon: LifebuoyIcon,
   },
-  {
-    label: "Sign Out",
-    icon: PowerIcon,
-  },
 ];
 
+const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error(error);
+  }
+};
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -114,13 +120,27 @@ function ProfileMenu() {
                 as="span"
                 variant="small"
                 className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
+                color={"inherit"}
               >
                 {label}
               </Typography>
             </MenuItem>
           );
         })}
+        <MenuItem>
+          {React.createElement(PowerIcon, {
+            className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+            strokeWidth: 2,
+          })}
+          <Typography
+            as="span"
+            variant="small"
+            className="font-normal"
+            color={"inherit"}
+          >
+            SignOut
+          </Typography>
+        </MenuItem>
       </MenuList>
     </Menu>
   );
@@ -137,7 +157,6 @@ function Nav() {
       () => window.innerWidth >= 960 && setIsNavOpen(false)
     );
   }, []);
-  let user = false;
   const router = useRouter();
   return (
     <>
@@ -186,7 +205,6 @@ function Nav() {
               <>
                 <Link href="/seller">
                   <Chip
-                    href
                     value="Become a seller"
                     variant="ghost"
                     color="teal"
@@ -222,6 +240,13 @@ function Nav() {
                     <Typography variant="small" className="font-normal">
                       Inbox
                     </Typography>
+                  </MenuItem>
+                  <MenuItem
+                    className="flex items-center gap-2"
+                    onClick={logout}
+                  >
+                    <FiLogOut />
+                    logout
                   </MenuItem>
                 </>
               ) : (

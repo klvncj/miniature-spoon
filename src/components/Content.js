@@ -60,27 +60,6 @@ const Content = () => {
       rating: 4.5,
       seller: "Kelvin",
     },
-    {
-      title: "Room To Rent Pay Yearly",
-      location: "ifite",
-      price: 1000000,
-      rating: 4.5,
-      seller: "Kelvin",
-    },
-    {
-      title: "Room To Rent Pay Yearly",
-      location: "ifite",
-      price: 1000000,
-      rating: 4.5,
-      seller: "Kelvin",
-    },
-    {
-      title: "Room To Rent Pay Yearly",
-      location: "ifite",
-      price: 1000000,
-      rating: 4.5,
-      seller: "Kelvin",
-    },
   ];
   const data = [
     {
@@ -89,8 +68,6 @@ const Content = () => {
       icon: <MdApartment size={28} />,
       desc: (
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 mx-3">
-          <Listing location="Apartment" />
-          <Listing location="Apartment" />
           <Listing location="Apartment" />
           <Listing location="Apartment" />
           <Listing location="Apartment" />
@@ -104,8 +81,6 @@ const Content = () => {
       icon: <BiBuildings size={28} />,
       desc: (
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 mx-3">
-          <Listing location="Home" />
-          <Listing location="Home" />
           <Listing location="Home" />
           <Listing location="Home" />
           <Listing location="Home" />
@@ -124,8 +99,6 @@ const Content = () => {
           <Listing location="Lodge" />
           <Listing location="Lodge" />
           <Listing location="Lodge" />
-          <Listing location="Lodge" />
-          <Listing location="Lodge" />
         </main>
       ),
     },
@@ -136,8 +109,6 @@ const Content = () => {
       icon: <RiBuilding2Fill size={28} />,
       desc: (
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 mx-3">
-          <Listing location="Quaters" />
-          <Listing location="Quaters" />
           <Listing location="Quaters" />
           <Listing location="Quaters" />
           <Listing location="Quaters" />

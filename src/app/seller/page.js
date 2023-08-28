@@ -1,13 +1,14 @@
 "use client";
-import { SignUp } from "@/components/SignUp";
 import React from "react";
+import { useRouter } from "next/navigation";
 const user = {
   name: "Kelvin Chijioke",
   email: "ckelvin196gmail.com",
   seller: false,
 };
-function page() {
-  return <>{user.seller ? <span>Kelvin</span> : <SignUp />}</>;
+function Page() {
+  const router = useRouter();
+  return <>{user.seller ? <span>Kelvin</span> : [router.push("/signup")]}</>;
 }
 
-export default page;
+export default Page;
