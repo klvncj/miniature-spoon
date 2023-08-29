@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import "react-toastify/dist/ReactToastify.css";
 import logo from "../asset/images//png-transparent-airbnb-logo-san-francisco-travel-hotel-airbnb-logo-text-trademark-logo-removebg-preview.png";
 import { HiSearch, HiInbox } from "react-icons/hi";
 import { HiInboxArrowDown } from "react-icons/hi2";
@@ -7,8 +8,6 @@ import { useRouter } from "next/navigation";
 const { BiSolidHelpCircle, BiUserPlus, BiLockAlt } = require("react-icons/bi");
 import { FiLogOut } from "react-icons/fi";
 import {
-  Navbar,
-  MobileNav,
   Typography,
   Button,
   Menu,
@@ -16,34 +15,23 @@ import {
   MenuList,
   MenuItem,
   Avatar,
-  Card,
-  IconButton,
   Chip,
 } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
 import {
-  CubeTransparentIcon,
   UserCircleIcon,
-  CodeBracketSquareIcon,
-  Square3Stack3DIcon,
   ChevronDownIcon,
   Cog6ToothIcon,
   InboxArrowDownIcon,
   LifebuoyIcon,
   PowerIcon,
-  RocketLaunchIcon,
-  Bars2Icon,
 } from "@heroicons/react/24/outline";
-import { ImUsers } from "react-icons/im";
 import { BiMenu } from "react-icons/bi";
-import {} from "@material-tailwind/react";
 import { BsFillHouseAddFill } from "react-icons/bs";
-import { Router } from "next/router";
-import { data } from "autoprefixer";
 import Link from "next/link";
-import { user } from "@/app/signup/page";
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import { ToastContainer, toast } from "react-toastify";
 // profile menu component
 const profileMenuItems = [
   {
@@ -67,6 +55,7 @@ const profileMenuItems = [
 const logout = async () => {
   try {
     await signOut(auth);
+    toast.info("Logged Out");
   } catch (error) {
     console.error(error);
   }
@@ -113,7 +102,7 @@ function ProfileMenu() {
               }`}
             >
               {React.createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                className: `h-4 w-4 `,
                 strokeWidth: 2,
               })}
               <Typography
@@ -127,9 +116,14 @@ function ProfileMenu() {
             </MenuItem>
           );
         })}
-        <MenuItem>
+        <MenuItem
+          className="flex items-center gap-2 rounded"
+          onClick={() => {
+            logout;
+          }}
+        >
           {React.createElement(PowerIcon, {
-            className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+            className: `h-4 w-4 `,
             strokeWidth: 2,
           })}
           <Typography
@@ -146,7 +140,7 @@ function ProfileMenu() {
   );
 }
 
-function Nav() {
+function Nav({ user }) {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
@@ -260,10 +254,12 @@ function Nav() {
                     </Link>
                   </MenuItem>
                   <MenuItem className="flex items-center gap-2">
-                    <BiLockAlt />
-                    <Typography variant="small" className="font-normal">
-                      Login
-                    </Typography>
+                    <a href="/login" className="flex items-center gap-2">
+                      <BiLockAlt />
+                      <Typography variant="small" className="font-normal">
+                        Login
+                      </Typography>
+                    </a>
                   </MenuItem>
                 </>
               )}
@@ -284,6 +280,7 @@ function Nav() {
           </Menu>
         </div>
       </nav>
+      <ToastContainer />
     </>
   );
 }

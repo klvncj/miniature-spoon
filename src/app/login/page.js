@@ -6,25 +6,30 @@ import "react-toastify/dist/ReactToastify.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "@/config/firebase";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 function Login() {
-  const status = (data) => {
-    toast.info(data);
-  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login = async () => {
+  const login = async (e) => {
+    e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      status("Logged In");
+      toast.success("Success", {
+        toastId: "customId",
+      });
+      console.log(auth?.currentUser);
     } catch (error) {
-      status(`failure : ${error}`);
+      toast.error("Login Error!", {
+        toastId: "customId",
+      });
     }
   };
+  const [view, setView] = useState(false);
   return (
     <>
       <Nav />
       <div className="h-[90vh] w-[100%] flex items-center justify-center">
-        <Card color="transparent" className="p-3" shadow={true}>
+        <Card color="transparent" className="p-5" shadow={true}>
           <Typography
             variant="h4"
             className="flex justify-center"
@@ -43,11 +48,26 @@ function Login() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                required
               />
               <Input
-                type="password"
+                type={view ? "text" : "password"}
                 size="lg"
                 label="Password"
+                required
+                icon={
+                  view ? (
+                    <BsEye
+                      className="cursor-pointer"
+                      onClick={() => setView(!view)}
+                    />
+                  ) : (
+                    <BsEyeSlash
+                      className="cursor-pointer"
+                      onClick={() => setView(!view)}
+                    />
+                  )
+                }
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
