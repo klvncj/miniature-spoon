@@ -7,10 +7,7 @@ import { user } from "../app/signup/page";
 const Home = () => {
   return (
     <>
-      {/* Header */}
-      {/* <Header /> */}
       <Nav />
-      {/* Banner */}
       <Content />
     </>
   );
