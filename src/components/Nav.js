@@ -203,14 +203,14 @@ function Nav() {
               </>
             ) : (
               <>
-                <Link href="/seller">
+                <a href="/seller">
                   <Chip
                     value="Become a seller"
                     variant="ghost"
                     color="teal"
                     className="flex items-center"
                   />
-                </Link>
+                </a>
                 <Chip className=" flex items-center mr-4" value="Guest" />
               </>
             )}
@@ -252,10 +252,12 @@ function Nav() {
               ) : (
                 <>
                   <MenuItem className="flex items-center gap-2">
-                    <BiUserPlus />
-                    <Typography variant="small" className="font-normal">
-                      Sign Up
-                    </Typography>
+                    <Link className="flex items-center gap-2" href="/signup">
+                      <BiUserPlus />
+                      <Typography variant="small" className="font-normal">
+                        Sign Up
+                      </Typography>
+                    </Link>
                   </MenuItem>
                   <MenuItem className="flex items-center gap-2">
                     <BiLockAlt />

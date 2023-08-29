@@ -140,7 +140,7 @@ const Content = () => {
 
   return (
     <>
-      <Tabs id="custom-animation" value="html">
+      <Tabs id="custom-animation" value="apartment">
         <TabsHeader className="overflow-x-scroll no-scrollbar">
           {data.map(({ label, icon, value }) => (
             <Tab key={value} value={value}>
