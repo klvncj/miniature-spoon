@@ -155,13 +155,7 @@ const Content = () => {
             </Tab>
           ))}
         </TabsHeader>
-        <TabsBody
-          animate={{
-            initial: { y: 250 },
-            mount: { y: 0 },
-            unmount: { y: 250 },
-          }}
-        >
+        <TabsBody>
           {data.map(({ value, desc }) => (
             <TabPanel key={value} value={value}>
               {desc}

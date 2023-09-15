@@ -2,11 +2,12 @@ import React from "react";
 import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../asset/images//png-transparent-airbnb-logo-san-francisco-travel-hotel-airbnb-logo-text-trademark-logo-removebg-preview.png";
-import { HiSearch, HiInbox } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
 import { HiInboxArrowDown } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 const { BiSolidHelpCircle, BiUserPlus, BiLockAlt } = require("react-icons/bi");
 import { FiLogOut } from "react-icons/fi";
+import { Auth } from "firebase/auth";
 import {
   Typography,
   Button,
@@ -29,7 +30,7 @@ import {
 import { BiMenu } from "react-icons/bi";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import Link from "next/link";
-import { signOut } from "firebase/auth";
+import { signOut, signInAnonymously } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { ToastContainer, toast } from "react-toastify";
 // profile menu component
@@ -143,6 +144,15 @@ function ProfileMenu() {
 function Nav({ user }) {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
+  const signinGuest = async () => {
+    try {
+      const guest = await signInAnonymously(auth);
+      toast.success("Signed In");
+    } catch {
+      toast.error("Sign in failed");
+    }
+  };
+
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
   React.useEffect(() => {
@@ -167,6 +177,7 @@ function Nav({ user }) {
             type="text"
             icon={
               <HiSearch
+                className="cursor-pointer"
                 onClick={() => {
                   console.log("Search....");
                 }}
@@ -180,6 +191,7 @@ function Nav({ user }) {
             label="Search"
             icon={
               <HiSearch
+                className="cursor-pointer"
                 onClick={() => {
                   console.log("Search Mobile...");
                 }}
@@ -205,7 +217,11 @@ function Nav({ user }) {
                     className="flex items-center"
                   />
                 </a>
-                <Chip className=" flex items-center mr-4" value="Guest" />
+                <Chip
+                  className=" flex items-center mr-4 cursor-pointer"
+                  value="Guest"
+                  onClick={signinGuest}
+                />
               </>
             )}
           </div>
