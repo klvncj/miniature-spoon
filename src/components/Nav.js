@@ -33,22 +33,28 @@ import Link from "next/link";
 import { signOut, signInAnonymously } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { ToastContainer, toast } from "react-toastify";
+import { useAuth } from "@/app/context/Context";
+
 // profile menu component
 const profileMenuItems = [
   {
     label: "My Profile",
+    link: "profile",
     icon: UserCircleIcon,
   },
   {
     label: "Edit Profile",
+    link: "profile",
     icon: Cog6ToothIcon,
   },
   {
     label: "Inbox",
+    link: "contact",
     icon: InboxArrowDownIcon,
   },
   {
     label: "Help",
+    link: "help",
     icon: LifebuoyIcon,
   },
 ];
@@ -90,30 +96,24 @@ function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, link }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
-            <MenuItem
-              key={label}
-              onClick={closeMenu}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem
-                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                  : ""
-              }`}
-            >
-              {React.createElement(icon, {
-                className: `h-4 w-4 `,
-                strokeWidth: 2,
-              })}
-              <Typography
-                as="span"
-                variant="small"
-                className="font-normal"
-                color={"inherit"}
-              >
-                {label}
-              </Typography>
+            <MenuItem key={label} onClick={closeMenu}>
+              <a href={`/${link}`} className="flex items-center gap-2 rounded">
+                {React.createElement(icon, {
+                  className: `h-4 w-4 `,
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={"inherit"}
+                >
+                  {label}
+                </Typography>
+              </a>
             </MenuItem>
           );
         })}
@@ -140,13 +140,14 @@ function ProfileMenu() {
     </Menu>
   );
 }
-
-function Nav({ user }) {
+const user = true;
+function Nav({}) {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
   const signinGuest = async () => {
     try {
       const guest = await signInAnonymously(auth);
+
       toast.success("Signed In");
     } catch {
       toast.error("Sign in failed");
@@ -242,7 +243,9 @@ function Nav({ user }) {
                       size="sm"
                     />
                     <Typography variant="small" className="font-normal">
-                      Profile
+                      <a href="/profile" className="opacity-60">
+                        <span>Profile</span>
+                      </a>
                     </Typography>
                   </MenuItem>
                   <MenuItem className="flex items-center gap-2">
